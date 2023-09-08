@@ -1,0 +1,60 @@
+<div class="h-auto">
+  <div class="forms-container flex my-5">
+    <form class="filters relative w-[390px]">
+      <h2 class="absolute top-[5px] left-[30px] border-black border-[2px] rounded bg-white px-1 ">Отфильтровать по:</h2>
+      <div class="flex w-[370px] border-black rounded border-[2px] py-[20px] px-[10px] m-[20px] justify-between" style="background-image: url('../../../assets/filters-shape.png')">
+        <fieldset>
+          <legend>Цене:</legend>
+          <div class="from flex text-gray-600">
+            <label class="px-2">От</label>
+            <input #from name='from' type="number" class="w-[25px] outline-none" placeholder="__">
+            {{ currencyName }}
+          </div>
+          <div class="to flex text-gray-600">
+            <label class="px-2">До</label>
+            <input #to name='to' type="number" class="w-[25px] outline-none" placeholder="__">
+            {{ currencyName }}
+          </div>
+        </fieldset>
+        <fieldset class="w-[180px]">
+          <legend>Названию:</legend>
+          <input #title name='title' type="text" class="w-[180px] bg-transparent text-black px-2 outline-none" placeholder="Название продукта">
+        </fieldset>
+        <button (click)="applyFilters(from.value, to.value, title.value)" class="absolute border-black border-[2px] rounded bg-white px-1 bottom-[5px] right-[60px] ">Применить</button>
+        <button (click)="resetFitlers()" class="absolute border-black border-[2px] rounded bg-white px-1 bottom-[5px] left-[60px] ">Сбросить</button>
+      </div>
+    </form>
+
+    <form class="flex items-center justify-between w-[300px] h-[50px] rounded border-r-0 ml-[400px] mt-[50px] border-black pl-3 text-black border-[2px]">
+      <input #searchInput class="outline-none w-[100%]" type="text" placeholder="Введите название товара">
+      <button (click)="applySearch(searchInput.value)" class="bg-blue-600 text-white rounded text-center my-auto p-2">Поиск</button>
+    </form>
+  </div>
+
+  <ul class="catalog flex flex-wrap h-[1000px]">
+    <li cdkDrag *ngFor="let item of items | filterProducts:byPrice:byTitle" class="relative flex flex-col gap-2" style="width: 200px; height: 300px">
+      <img [src]="item.image" alt="stuff" width="100px" height="100px" class="">
+      <div class="absolute right-10 top-2 border-neutral-700 rounded p-2">
+        <p class="text-amber-400 cursor-pointer" [title]="item.category">{{ item.category | categoryView }}</p>
+      </div>
+      <p class="text-amber-500 cursor-pointer" [title]="item.title">{{ item.title | fixedLength }}</p>
+      <p class="text-amber-950 mx-auto">{{ item.price * currencyValue | number:'1.2-2' }} {{ currencyName }}</p>
+      <button (click)="openModalWithData(item)">More</button>
+    </li>
+  </ul>
+
+    <div *ngIf="isOpened===true" (click)="closeModal($event)" class="modal-background fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center align-middle">
+      <div class="modal w-[400px] h-[500px] bg-white">
+        <button (click)="isOpened=false">x</button>
+        <img [src]="selectedItem?.image" width="50px" [alt]="selectedItem?.title">
+        <hr>
+        <p>Category: {{ selectedItem?.category }}</p>
+        <hr>
+        <p>{{ selectedItem?.title }}</p>
+        <hr>
+        <p>{{ selectedItem?.description }}</p>
+        <hr>
+        <button>Buy</button>
+      </div>
+    </div>
+</div>

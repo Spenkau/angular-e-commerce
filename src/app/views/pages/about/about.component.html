@@ -1,0 +1,15 @@
+<section class="p-[20px]" #parentBlock>
+  <p><span style="color: red; font-size: 24px;">У</span>важаемые друзья и покупатели!</p>
+    <p *ngFor="let phrase of textArray" class="pl-5">
+      {{ phrase }}
+    </p>
+    <form [formGroup]="aboutForm" class="flex flex-col w-[400px]" (ngSubmit)="onAbout()">
+      <label for="name">Ваше имя:</label>
+      <input type="text" id="name" formControlName="name" class="outline-none" placeholder="Введите ваше имя: ">
+
+      <label for="email">Ваш е-майл:</label>
+      <input type="text" id="email" formControlName="email" class="outline-none" placeholder="Введите ваше емайл: ">
+
+      <button type="submit" class="text-white bg-blue-500 p-5 rounded">Отправить</button>
+    </form>
+</section>
