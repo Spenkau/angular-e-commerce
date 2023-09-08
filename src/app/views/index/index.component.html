@@ -43,7 +43,7 @@
     </li>
   </ul>
 
-    <div *ngIf="isOpened===true" (click)="closeModal($event)" class="modal-background fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center align-middle">
+    <div *ngIf="isOpened" (click)="closeModal($event)" class="modal-background fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center align-middle">
       <div class="modal w-[400px] h-[500px] bg-white">
         <button (click)="isOpened=false">x</button>
         <img [src]="selectedItem?.image" width="50px" [alt]="selectedItem?.title">
