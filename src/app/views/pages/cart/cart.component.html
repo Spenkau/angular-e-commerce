@@ -1,1 +1,17 @@
-<p>cart works!</p>
+<section class="h-screen">
+  <div *ngIf="dateSettings">
+    <h1>Время сейчас</h1>
+    <span>{{ dateSettings.hours }} : {{ dateSettings.minutes }} : {{ dateSettings.seconds }}</span>
+  </div>
+  <h2>Ваша корзина <ng-container *ngIf="cartItems.length === 0">пуста</ng-container></h2>
+  <ul class="cart-items">
+    <li *ngFor="let item of cartItems" class="w-[200px] flex flex-wrap">
+      <img [src]="item.image" [alt]="item.title" class="w-[100px] h-[150px]">
+      <p class="text-red-400">{{ item.category | categoryView }}</p>
+      <p class="text-xl">{{ item.title }} - <span class="text-blue-500">{{ item.price }}</span></p>
+      <p class="">{{ item.description }}</p>
+      <hr>
+      <p>{{ item.rate }} - {{ item.count }}</p>
+    </li>
+  </ul>
+</section>

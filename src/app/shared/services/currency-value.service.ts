@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import axios from "axios";
 
 @Injectable({
@@ -19,13 +19,13 @@ export class CurrencyValueService {
     }
   }
 
-  async getCurrencyValueByTag(): Promise<number> {
-    if (!this.currencyValues) {
-      await this.getCurrencyValues()
-    }
-
-    return this.currencyValues[this.selectedOption]
-  }
+  // getCurrencyValueByTag(): Promise<number> {
+  //   if (!this.currencyValues) {
+  //     this.getCurrencyValues()
+  //   }
+  //
+  //   return this.currencyValues[this.selectedOption]
+  // }
 
   get option(): string {
     return this.selectedOption;

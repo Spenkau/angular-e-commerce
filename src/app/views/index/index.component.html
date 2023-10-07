@@ -1,8 +1,8 @@
 <div class="h-auto">
   <div class="forms-container flex my-5">
-    <form class="filters relative w-[390px]">
+    <form class="filters relative w-[450px]">
       <h2 class="absolute top-[5px] left-[30px] border-black border-[2px] rounded bg-white px-1 ">Отфильтровать по:</h2>
-      <div class="flex w-[370px] border-black rounded border-[2px] py-[20px] px-[10px] m-[20px] justify-between" style="background-image: url('../../../assets/filters-shape.png')">
+      <div class="flex w-[450px] border-black rounded border-[2px] py-[20px] px-[10px] m-[20px] justify-between" style="background-image: url('../../../assets/filters-shape.png')">
         <fieldset>
           <legend>Цене:</legend>
           <div class="from flex text-gray-600">
@@ -20,14 +20,22 @@
           <legend>Названию:</legend>
           <input #title name='title' type="text" class="w-[180px] bg-transparent text-black px-2 outline-none" placeholder="Название продукта">
         </fieldset>
+        <fieldset class="w-[180px]">
+          <legend>Категории:</legend>
+          <select [ngModel]="selectedCategory" (change)="onCategoryChange()">
+            <option value="all">Все</option>
+            <option *ngFor="let category of categories" [value]="category">
+              {{ category }}
+            </option>
+          </select>
+        </fieldset>
         <button (click)="applyFilters(from.value, to.value, title.value)" class="absolute border-black border-[2px] rounded bg-white px-1 bottom-[5px] right-[60px] ">Применить</button>
         <button (click)="resetFitlers()" class="absolute border-black border-[2px] rounded bg-white px-1 bottom-[5px] left-[60px] ">Сбросить</button>
       </div>
     </form>
 
     <form class="flex items-center justify-between w-[300px] h-[50px] rounded border-r-0 ml-[400px] mt-[50px] border-black pl-3 text-black border-[2px]">
-      <input #searchInput class="outline-none w-[100%]" type="text" placeholder="Введите название товара">
-      <button (click)="applySearch(searchInput.value)" class="bg-blue-600 text-white rounded text-center my-auto p-2">Поиск</button>
+      <input [formControl]="searchControl" class="outline-none w-[100%]" type="text" placeholder="Введите название товара">
     </form>
   </div>
 
@@ -54,7 +62,9 @@
         <hr>
         <p>{{ selectedItem?.description }}</p>
         <hr>
-        <button>Buy</button>
+        <button class="text-left w-[100%]">Buy</button>
+
+        <button (click)="addToCart()" class="text-left w-[100%]">Add to cart</button>
       </div>
     </div>
 </div>

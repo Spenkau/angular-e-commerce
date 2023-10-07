@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from "@angular/forms";
 import {FormsModule} from "@angular/forms";
 import {IndexComponent} from "./index.component";
 import {CategoryViewDirective} from "../../shared/directives/category-view.directive";
@@ -11,18 +12,22 @@ import {CdkDrag} from "@angular/cdk/drag-drop";
 
 
 @NgModule({
-  declarations: [
-    IndexComponent,
-    CategoryViewDirective,
-    CategoryViewPipe,
-    FixedLengthPipe,
-    FilterProductsPipe
-  ],
+    declarations: [
+        IndexComponent,
+        CategoryViewDirective,
+        CategoryViewPipe,
+        FixedLengthPipe,
+        FilterProductsPipe
+    ],
     imports: [
         CommonModule,
         FormsModule,
-        CdkDrag
+        CdkDrag,
+        ReactiveFormsModule
     ],
-  providers: []
+    exports: [
+        CategoryViewPipe
+    ],
+    providers: []
 })
 export class IndexModule { }
